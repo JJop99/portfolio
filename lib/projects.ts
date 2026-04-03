@@ -10,8 +10,10 @@ export interface Project {
     category: string;
     items: string[];
   }[];
-  github: string;
+  github?: string;
   demo?: string;
+  pdfUrl?: string;
+  pdfLabel?: string;
   featured: boolean;
   label?: string;
   imageUrl: string;
@@ -35,6 +37,8 @@ export const PROJECTS: Project[] = [
       { category: "DevOps", items: ["Docker", "Terraform", "AWS EC2"] },
     ],
     github: "https://github.com/JJop99/pagespeed-dashboard",
+    pdfUrl: "https://github.com/JJop99/JJop99/raw/main/Internship%20Report.pdf",
+    pdfLabel: "Internship Report",
     featured: true,
     label: "Internship project",
     imageUrl: "https://opengraph.githubassets.com/1/JJop99/pagespeed-dashboard",
@@ -62,6 +66,8 @@ export const PROJECTS: Project[] = [
       { category: "Deployment", items: ["Vercel"] },
     ],
     github: "https://github.com/JJop99/luca_jop",
+    pdfUrl: "https://github.com/JJop99/JJop99/raw/main/Graduation_Thesis_Jop_Jacopo.pdf",
+    pdfLabel: "Download Thesis PDF",
     featured: true,
     label: "Thesis project",
     imageUrl: "https://opengraph.githubassets.com/1/JJop99/luca_jop",
