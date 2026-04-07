@@ -157,6 +157,36 @@ export const PROJECTS: Project[] = [
       "Addresses a real sustainability problem: reducing unnecessary car journeys to shared events",
     ],
   },
+  {
+    slug: "atena-srl-website",
+    title: "Atena S.r.l. — Corporate Website",
+    shortDescription:
+      "Full corporate website for a construction & restoration company, with a headless CMS, GDPR compliance, animations, and automated testing.",
+    fullDescription:
+      "A production-grade corporate website built for Atena S.r.l., a company specialising in construction, restoration, and energy efficiency. The site is fully managed via Sanity CMS — the client can update all content, SEO metadata, images, projects, and articles without touching code. Features include Framer Motion animations, a GDPR-compliant cookie banner with conditional analytics, a contact form with email delivery, automated sitemaps, JSON-LD schema for local business SEO, and a full test suite (Vitest unit tests + Playwright E2E). Deployed on Vercel with automatic redeploy on CMS content changes via webhook.",
+    period: "2025",
+    context: "Freelance project — Atena S.r.l.",
+    tags: ["Next.js 15", "Sanity CMS", "TypeScript", "Framer Motion", "Tailwind CSS", "Vercel"],
+    techStack: [
+      { category: "Frontend", items: ["Next.js 15 (App Router)", "React", "TypeScript", "Tailwind CSS", "Framer Motion"] },
+      { category: "CMS", items: ["Sanity.io", "GROQ queries", "Webhook revalidation"] },
+      { category: "Testing", items: ["Vitest (unit)", "Playwright (E2E)"] },
+      { category: "Infrastructure", items: ["Vercel", "Vercel Analytics", "Sanity CDN"] },
+      { category: "Other", items: ["GDPR cookie consent", "JSON-LD schema", "Dynamic sitemap", "Contact form API"] },
+    ],
+    demo: "https://atenabuildings.com",
+    featured: true,
+    label: "Freelance project",
+    imageUrl: "https://atenabuildings.com/opengraph-image",
+    highlights: [
+      "Fully CMS-driven: client manages all content, SEO, images, and legal pages from Sanity Studio",
+      "GDPR-compliant cookie banner with conditional Vercel Analytics activation",
+      "Framer Motion animations throughout with lazy loading for performance",
+      "Full test suite: Vitest for unit tests, Playwright for end-to-end tests",
+      "Automatic content revalidation via Sanity webhook — no redeploy needed on content changes",
+      "JSON-LD LocalBusiness schema and dynamic sitemap for SEO",
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
