@@ -187,6 +187,32 @@ export const PROJECTS: Project[] = [
       "JSON-LD LocalBusiness schema and dynamic sitemap for SEO",
     ],
   },
+  {
+    slug: "when-landing",
+    title: "When — App Landing Page",
+    shortDescription:
+      "Landing page for When, an iOS and Android event organiser app, commissioned by the software house that developed the app.",
+    fullDescription:
+      "A promotional landing page built for When, a mobile app for organising events and meetups, available on both the App Store and Google Play. Commissioned by the software house behind the app, the page features a custom Lottie logo animation, full-screen video sections, App Store and Google Play download badges, a team page, and an embedded Google Maps contact section. Built with HTML, SCSS, and jQuery — my first professional web project.",
+    period: "2018",
+    context: "Freelance — commissioned by software house",
+    tags: ["HTML", "CSS/SCSS", "jQuery", "Lottie", "Bootstrap"],
+    techStack: [
+      { category: "Frontend", items: ["HTML5", "SCSS", "jQuery", "Bootstrap"] },
+      { category: "Animations", items: ["Lottie / bodymovin", "CSS animations"] },
+      { category: "Other", items: ["Google Maps embed", "App Store & Play Store integration"] },
+    ],
+    github: "https://github.com/JJop99/sito_When",
+    featured: false,
+    label: "Freelance",
+    imageUrl: "https://opengraph.githubassets.com/1/JJop99/sito_When",
+    highlights: [
+      "First professional web project, commissioned by an external client",
+      "Custom Lottie logo animation with bodymovin",
+      "Full-screen video sections with autoplay on mobile via VisSense",
+      "Download section with App Store and Google Play badges",
+    ],
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
