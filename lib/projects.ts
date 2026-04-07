@@ -108,24 +108,28 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: "lucajop-react",
-    title: "lucajop-react",
+    title: "lucajop-react — React (CSR) implementation",
     shortDescription:
-      "React rebuild of a personal website — a migration to a fully component-driven architecture.",
+      "React.js (CSR) build of lucajop.it — the counterpart to the Next.js version, built to directly compare client-side vs server-side rendering as part of the bachelor's thesis.",
     fullDescription:
-      "A React.js rebuild of an existing personal website (lucajop.it), migrating it from a static HTML/CSS structure to a modern component-driven architecture. The goal was to improve maintainability and learn React patterns by applying them to a familiar codebase.",
-    period: "2022",
-    context: "Personal project",
-    tags: ["React.js", "JavaScript"],
+      "This is the React.js (Client-Side Rendering) implementation of lucajop.it, built as the CSR counterpart to the Next.js (SSR) version for the bachelor's thesis. The two implementations are functionally equivalent but use different rendering strategies, enabling direct benchmarking of loading speed, SEO performance, and resource efficiency on identical content. The thesis concluded that Next.js achieved better Core Web Vitals and search engine visibility, while React.js remains preferable for highly interactive Single-Page Applications.",
+    period: "2023 – 2024",
+    context: "Bachelor's Thesis — University of Bologna",
+    tags: ["React.js", "CSR", "JavaScript", "Performance", "SEO"],
     techStack: [
-      { category: "Framework", items: ["React.js"] },
+      { category: "Framework", items: ["React.js (CSR)"] },
       { category: "Language", items: ["JavaScript"] },
+      { category: "Analysis", items: ["Google PageSpeed Insights", "Core Web Vitals", "Lighthouse"] },
     ],
     github: "https://github.com/JJop99/lucajop-react",
     featured: false,
+    label: "Bachelor's thesis",
     imageUrl: "https://opengraph.githubassets.com/1/JJop99/lucajop-react",
     highlights: [
-      "Migrated a static website to a component-driven React architecture",
-      "Focused on learning React patterns and component reusability",
+      "CSR counterpart to the Next.js thesis implementation — same site, different rendering strategy",
+      "Enabled direct benchmarking: React.js (CSR) vs Next.js (SSR) on identical content",
+      "Thesis concluded CSR remains preferable for high-interactivity Single-Page Applications",
+      "Part of the practical component of the bachelor's thesis supervised by Prof. Paolo Bellavista",
     ],
   },
   {
