@@ -1,4 +1,40 @@
+import Link from "next/link";
+import { PROJECTS, Project } from "@/lib/projects";
 import Winshot from "./Winshot";
+
+function projectDisplayUrl(p: Project): string {
+  if (p.demo) {
+    try {
+      return new URL(p.demo).hostname;
+    } catch {}
+  }
+  if (p.github) return p.github.replace("https://github.com/", "github/");
+  return p.slug;
+}
+
+function ProjectCard({
+  slug,
+  variant = "default",
+  style,
+}: {
+  slug: string;
+  variant?: "default" | "terra" | "ink";
+  style?: React.CSSProperties;
+}) {
+  const p = PROJECTS.find((x) => x.slug === slug);
+  if (!p) return null;
+  return (
+    <Link href={`/projects/${slug}`} style={{ display: "contents" }}>
+      <Winshot
+        variant={variant}
+        url={projectDisplayUrl(p)}
+        title={p.title}
+        tags={p.tags.slice(0, 3).join(" · ")}
+        style={style}
+      />
+    </Link>
+  );
+}
 
 export default function Services() {
   return (
@@ -15,7 +51,7 @@ export default function Services() {
           </h2>
         </div>
 
-        {/* Service 1: Full-stack */}
+        {/* Row 01: Full-stack web applications */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
@@ -32,39 +68,13 @@ export default function Services() {
             </span>
           </div>
           <div className="right">
-            <Winshot
-              variant="terra"
-              url="atenabuildings.com"
-              title="Atena S.r.l."
-              tags="Next.js · Sanity · Vercel"
-            />
-            <Winshot
-              url="apartment-expenses"
-              title={
-                <>
-                  <span className="acc">Apartment</span>
-                  <br />
-                  Expenses.
-                </>
-              }
-              tags="TypeScript · Next.js"
-            />
-            <Winshot
-              variant="ink"
-              url="pagespeed-dashboard"
-              title={
-                <>
-                  PageSpeed
-                  <br />
-                  <span className="acc">Dashboard.</span>
-                </>
-              }
-              tags="React · Laravel · AWS"
-            />
+            <ProjectCard slug="atena-srl-website" variant="terra" />
+            <ProjectCard slug="apartment-expenses" />
+            <ProjectCard slug="pagespeed-dashboard" variant="ink" />
           </div>
         </div>
 
-        {/* Service 2: Performance */}
+        {/* Row 02: Performance & observability */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
@@ -81,11 +91,11 @@ export default function Services() {
             </span>
           </div>
           <div className="right">
+            {/* Hand-authored code demo — not a real project card */}
             <Winshot
               variant="ink"
               code
               url="lighthouse.ts — 18 lines"
-              className="code"
               style={{ flex: "0 0 520px" }}
             >
               <pre>
@@ -100,22 +110,11 @@ export default function Services() {
                 report({"{ lcp, cls, tbt }"});
               </pre>
             </Winshot>
-            <Winshot
-              variant="terra"
-              url="SSR vs CSR — thesis"
-              title={
-                <>
-                  Server vs
-                  <br />
-                  Client.
-                </>
-              }
-              tags="Univ. Bologna · 2024"
-            />
+            <ProjectCard slug="luca-jop" variant="terra" />
           </div>
         </div>
 
-        {/* Service 3: AI integrations */}
+        {/* Row 03: AI integrations & applied LLMs */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
@@ -132,33 +131,30 @@ export default function Services() {
             </span>
           </div>
           <div className="right">
-            <Winshot
-              url="llm-chat.local"
-              title={
-                <>
-                  <span className="acc">llama</span> 3.2
-                  <br />
-                  local.
-                </>
-              }
-              tags="anemll · M1 · 8B"
-            />
-            <Winshot
-              variant="ink"
-              url="/v1/chat — completions"
-              title={
-                <>
-                  Private by
-                  <br />
-                  <span className="acc">design.</span>
-                </>
-              }
-              tags="No data leaves the machine."
-            />
+            {/* Exploratory tile — no project page yet, links to GitHub */}
+            <a
+              href="https://github.com/JJop99"
+              target="_blank"
+              rel="noreferrer"
+              style={{ display: "contents" }}
+            >
+              <Winshot
+                url="llm-chat.local"
+                title={
+                  <>
+                    <span className="acc">llama</span> 3.2
+                    <br />
+                    local.
+                  </>
+                }
+                tags="anemll · M1 · 8B"
+              />
+            </a>
+            <ProjectCard slug="lucajop-react" variant="ink" />
           </div>
         </div>
 
-        {/* Service 4: Engineering practice */}
+        {/* Row 04: Engineering practice */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
@@ -175,32 +171,8 @@ export default function Services() {
             </span>
           </div>
           <div className="right">
-            <Winshot
-              url="CarpHaul · UML"
-              title={<span className="acc">CarpHaul.</span>}
-              tags="87 pages · UML · risk plan"
-            />
-            <Winshot
-              variant="terra"
-              url="terraform-apply.log"
-              title={
-                <>
-                  Infra as
-                  <br />
-                  code.
-                </>
-              }
-              tags="Docker · AWS · Terraform"
-            />
-            <Winshot
-              url="vitest + playwright"
-              title={
-                <em>
-                  <span className="acc">Tested.</span>
-                </em>
-              }
-              tags="Unit · E2E"
-            />
+            <ProjectCard slug="carphaul" />
+            <ProjectCard slug="when-landing" variant="terra" />
           </div>
         </div>
       </div>

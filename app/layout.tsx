@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import InfoStrip from "./components/InfoStrip";
+import Header from "./components/Header";
+import KineticBootstrap from "./components/KineticBootstrap";
+import Colophon from "./components/Colophon";
 
 export const metadata: Metadata = {
   title: "Jacopo Jop — Software developer",
@@ -31,7 +35,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <KineticBootstrap />
+        <InfoStrip />
+        <Header />
+        {children}
+        <Colophon />
+      </body>
     </html>
   );
 }

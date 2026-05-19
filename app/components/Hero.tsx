@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="hero">
@@ -39,10 +41,10 @@ export default function Hero() {
           </span>
         </div>
 
-        <div className="scroll-cue">
+        <Link href="#services" className="scroll-cue">
           <span>Keep scrolling</span>
           <span className="arr" />
-        </div>
+        </Link>
       </div>
     </section>
   );

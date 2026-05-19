@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Colophon() {
   return (
     <footer className="colophon">
@@ -24,16 +26,16 @@ export default function Colophon() {
             <h5>Navigation</h5>
             <ul>
               <li>
-                <a href="#services">Services</a>
+                <Link href="/#services">Services</Link>
               </li>
               <li>
-                <a href="#about">About</a>
+                <Link href="/#about">About</Link>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <Link href="/#contact">Contact</Link>
               </li>
               <li>
-                <a href="#">Work</a>
+                <Link href="/projects">Work</Link>
               </li>
             </ul>
           </div>
@@ -46,13 +48,25 @@ export default function Colophon() {
                 </a>
               </li>
               <li>
-                <a href="#">LinkedIn</a>
+                <a
+                  href="#"
+                  aria-label="Coming soon"
+                  style={{ pointerEvents: "none", opacity: 0.5 }}
+                >
+                  LinkedIn
+                </a>
               </li>
               <li>
                 <a href="mailto:jacopo.jop@gmail.com">Email</a>
               </li>
               <li>
-                <a href="#">CV.pdf</a>
+                <a
+                  href="#"
+                  aria-label="CV not available yet"
+                  style={{ pointerEvents: "none", opacity: 0.5 }}
+                >
+                  CV.pdf
+                </a>
               </li>
             </ul>
           </div>

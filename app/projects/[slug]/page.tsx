@@ -1,22 +1,36 @@
-import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { getProjectBySlug, getAllSlugs, PROJECTS } from "@/lib/projects";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} — Jacopo Jop`,
     description: project.shortDescription,
+    openGraph: {
+      title: `${project.title} — Jacopo Jop`,
+      description: project.shortDescription,
+      images: project.imageUrl ? [{ url: project.imageUrl }] : [],
+    },
   };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) notFound();
@@ -24,109 +38,166 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const currentIndex = PROJECTS.findIndex((p) => p.slug === slug);
   const prev = PROJECTS[currentIndex - 1];
   const next = PROJECTS[currentIndex + 1];
+  const num = String(currentIndex + 1).padStart(2, "0");
 
   return (
-    <div style={{ background: "var(--paper)", minHeight: "100vh" }}>
+    <main>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="project-hero">
+        <div className="container">
+          <div className="project-eyebrow">№ {num} · The project</div>
 
-      {/* Nav */}
-      <nav className="kit-project-nav">
-        <div className="kit-container">
-          <div className="kit-project-nav-row">
-            <Link href="/#work" className="kit-back">← Back to work</Link>
-            <span style={{ font: "var(--type-meta)", letterSpacing: "0.15em", color: "var(--ink-3)" }}>
-              jacopo.jop
-            </span>
+          <h1 className="project-headline">{project.title}</h1>
+
+          <div className="project-meta-row">
+            {project.label && (
+              <span className="meta-label">{project.label}</span>
+            )}
+            {project.label && <span className="meta-sep">·</span>}
+            <span className="meta-period">{project.period}</span>
+            <span className="meta-sep">·</span>
+            <span className="meta-context">{project.context}</span>
+            {project.tags.slice(0, 4).map((t) => (
+              <span key={t} className="meta-stack-pill">
+                {t}
+              </span>
+            ))}
           </div>
+
+          <p className="project-lede">{project.fullDescription}</p>
         </div>
-      </nav>
+      </section>
 
-      {/* Header */}
-      <div className="kit-project-header">
-        <div className="kit-container">
-          <div className="kit-project-pills">
-            {project.label && <span className="kit-pill acc">{project.label}</span>}
-            <span className="kit-pill">{project.period}</span>
-            <span className="kit-pill">{project.context}</span>
-          </div>
-          <h1 className="kit-project-title">{project.title}</h1>
-          <p className="kit-project-lead">{project.fullDescription}</p>
-          <div className="kit-project-ctas">
-            {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer" className="kit-btn">
-                ↗ GitHub
-              </a>
-            )}
-            {project.demo && (
-              <a href={project.demo} target="_blank" rel="noreferrer" className="kit-btn primary">
-                ↗ Live demo
-              </a>
-            )}
-            {project.pdfUrl && (
-              <a href={project.pdfUrl} target="_blank" rel="noreferrer" download className="kit-btn">
-                ↓ {project.pdfLabel ?? "Download PDF"}
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="kit-project-body">
-        <div className="kit-container">
-          <div className="kit-project-grid">
-
-            {/* Highlights */}
-            <ul className="kit-highlights">
-              {project.highlights.map((h, i) => (
-                <li key={i}>{h}</li>
-              ))}
-            </ul>
-
-            {/* Sidebar */}
-            <aside>
-              <div className="kit-sidebar-block">
-                <div className="kit-sidebar-label">Technologies</div>
-                <div className="kit-tag-row">
-                  {project.tags.map((t) => (
-                    <span key={t} className="kit-tag">{t}</span>
+      {/* ── Body ─────────────────────────────────────────── */}
+      <div className="project-body">
+        <div className="container">
+          <div className="project-grid">
+            {/* Main column */}
+            <div className="project-main">
+              {/* Key highlights */}
+              <section className="project-section">
+                <h2>Key highlights</h2>
+                <ul className="project-highlights">
+                  {project.highlights.map((h, i) => (
+                    <li key={i}>{h}</li>
                   ))}
+                </ul>
+              </section>
+
+              {/* Tech stack */}
+              <section className="project-section">
+                <h2>Tech stack</h2>
+                {project.techStack.map((group) => (
+                  <div key={group.category} className="tech-group">
+                    <span className="tech-category">{group.category}</span>
+                    <div className="tech-items">
+                      {group.items.map((item) => (
+                        <span key={item} className="tech-item">
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </section>
+            </div>
+
+            {/* Sticky sidebar */}
+            <aside className="project-aside">
+              <div className="aside-block">
+                <div className="aside-eyebrow">№ {num} · The project</div>
+
+                {(project.github || project.demo || project.pdfUrl) && (
+                  <>
+                    <h3>External links</h3>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="aside-link"
+                      >
+                        <span>GitHub</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="aside-link"
+                      >
+                        <span>Live demo</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+                    {project.pdfUrl && (
+                      <a
+                        href={project.pdfUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="aside-link"
+                      >
+                        <span>{project.pdfLabel ?? "PDF"}</span>
+                        <span>↗</span>
+                      </a>
+                    )}
+                  </>
+                )}
+
+                <div style={{ marginTop: "24px", borderTop: "1px solid var(--rule)", paddingTop: "16px" }}>
+                  <div className="aside-meta-row">
+                    <span className="aside-meta-key">Period</span>
+                    <span className="aside-meta-val">{project.period}</span>
+                  </div>
+                  <div className="aside-meta-row">
+                    <span className="aside-meta-key">Context</span>
+                    <span className="aside-meta-val">{project.context}</span>
+                  </div>
+                  {project.label && (
+                    <div className="aside-meta-row">
+                      <span className="aside-meta-key">Type</span>
+                      <span className="aside-meta-val">{project.label}</span>
+                    </div>
+                  )}
                 </div>
               </div>
-              {project.techStack.map((group) => (
-                <div key={group.category} className="kit-sidebar-block">
-                  <div className="kit-sidebar-label">{group.category}</div>
-                  <div className="kit-tag-row">
-                    {group.items.map((item) => (
-                      <span key={item} className="kit-tag">{item}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+
+              <Link href="/projects" className="aside-back">
+                ← All projects
+              </Link>
             </aside>
           </div>
 
           {/* Prev / Next */}
-          <div className="kit-project-nav-cards">
+          <div className="proj-nav-cards">
             <div>
-              {prev && (
-                <Link href={`/projects/${prev.slug}`} className="kit-nav-card">
-                  <div className="dir">← Previous</div>
-                  <div className="title">{prev.title}</div>
+              {prev ? (
+                <Link href={`/projects/${prev.slug}`} className="proj-nav-card">
+                  <div className="proj-nav-dir">← Previous</div>
+                  <div className="proj-nav-title">{prev.title}</div>
                 </Link>
+              ) : (
+                <div />
               )}
             </div>
             <div>
-              {next && (
-                <Link href={`/projects/${next.slug}`} className="kit-nav-card next">
-                  <div className="dir">Next →</div>
-                  <div className="title">{next.title}</div>
+              {next ? (
+                <Link
+                  href={`/projects/${next.slug}`}
+                  className="proj-nav-card next"
+                >
+                  <div className="proj-nav-dir">Next →</div>
+                  <div className="proj-nav-title">{next.title}</div>
                 </Link>
+              ) : (
+                <div />
               )}
             </div>
           </div>
         </div>
       </div>
-
-    </div>
+    </main>
   );
 }

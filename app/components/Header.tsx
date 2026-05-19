@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
@@ -5,15 +6,16 @@ export default function Header() {
     <header className="top">
       <div className="container">
         <div className="top-row">
-          <a className="wordmark-sm" href="#">
+          <Link className="wordmark-sm" href="/">
             Jacopo <em>J</em>op
-          </a>
+          </Link>
           <nav className="top-nav">
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#contact" className="cta">
+            <Link href="/#services">Services</Link>
+            <Link href="/#about">About</Link>
+            {/* Link to contact section; navigates back from detail pages via hash */}
+            <Link href="/#contact" className="cta">
               Let&apos;s talk
-            </a>
+            </Link>
             <ThemeToggle />
           </nav>
         </div>
