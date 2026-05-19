@@ -26,6 +26,63 @@ export async function generateMetadata({
   };
 }
 
+// Words to italicise per slug (proper nouns / project names)
+const ITALIC_WORDS: Record<string, string[]> = {
+  "carphaul": ["CarpHaul"],
+  "atena-srl-website": ["Atena"],
+  "when-landing": ["When"],
+};
+
+function ItalicTitle({ slug, title }: { slug: string; title: string }) {
+  const words = ITALIC_WORDS[slug] ?? [];
+  if (words.length === 0) return <>{title}</>;
+  const pattern = new RegExp(`(${words.map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
+  const parts = title.split(pattern);
+  return (
+    <>
+      {parts.map((part, i) =>
+        words.includes(part) ? <em key={i}>{part}</em> : part
+      )}
+    </>
+  );
+}
+
+// Per-project stats displayed as a count strip (omitted for simpler projects)
+const PROJECT_STATS: Record<string, { n: string; l: string }[]> = {
+  "pagespeed-dashboard": [
+    { n: "3", l: "Months internship" },
+    { n: "3", l: "AWS services" },
+    { n: "3", l: "Core Web Vitals" },
+  ],
+  "luca-jop": [
+    { n: "95", l: "Commits" },
+    { n: "2", l: "Frameworks" },
+    { n: "4", l: "Metrics tracked" },
+  ],
+  "carphaul": [
+    { n: "87", l: "Page document" },
+    { n: "3", l: "Team members" },
+    { n: "2", l: "Years of work" },
+  ],
+  "atena-srl-website": [
+    { n: "2", l: "Test suites" },
+    { n: "6", l: "Key highlights" },
+    { n: "1", l: "CMS — zero redeploys" },
+  ],
+  "when-landing": [
+    { n: "2018", l: "First pro project" },
+    { n: "2", l: "App store badges" },
+  ],
+};
+
+function projectDisplayUrl(slug: string, demo?: string, github?: string): string {
+  if (demo) {
+    try { return new URL(demo).hostname; } catch {}
+  }
+  if (github) return github.replace("https://github.com/", "github/");
+  return slug;
+}
+
 export default async function ProjectPage({
   params,
 }: {
@@ -39,15 +96,23 @@ export default async function ProjectPage({
   const prev = PROJECTS[currentIndex - 1];
   const next = PROJECTS[currentIndex + 1];
   const num = String(currentIndex + 1).padStart(2, "0");
+  const stats = PROJECT_STATS[slug];
+  const displayUrl = projectDisplayUrl(slug, project.demo, project.github);
 
   return (
     <main>
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="project-hero">
+        <span className="project-bg-num" aria-hidden="true">{num}</span>
+
         <div className="container">
           <div className="project-eyebrow">№ {num} · The project</div>
 
-          <h1 className="project-headline">{project.title}</h1>
+          <h1 className="project-headline">
+            <ItalicTitle slug={slug} title={project.title} />
+          </h1>
+
+          <div className="project-rule" />
 
           <div className="project-meta-row">
             {project.label && (
@@ -74,6 +139,26 @@ export default async function ProjectPage({
           <div className="project-grid">
             {/* Main column */}
             <div className="project-main">
+              {/* Pull-quote from first highlight */}
+              <blockquote className="pullquote">
+                {project.highlights[0]}
+              </blockquote>
+
+              {/* Inline stats strip */}
+              {stats && (
+                <section className="project-section">
+                  <h2>By the numbers</h2>
+                  <div className="project-stats">
+                    {stats.map((s) => (
+                      <div key={s.l} className="stat">
+                        <span className="n">{s.n}</span>
+                        <span className="l">{s.l}</span>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {/* Key highlights */}
               <section className="project-section">
                 <h2>Key highlights</h2>
@@ -170,13 +255,25 @@ export default async function ProjectPage({
             </aside>
           </div>
 
-          {/* Prev / Next */}
+          {/* Prev / Next — winshot chrome */}
           <div className="proj-nav-cards">
             <div>
               {prev ? (
                 <Link href={`/projects/${prev.slug}`} className="proj-nav-card">
-                  <div className="proj-nav-dir">← Previous</div>
-                  <div className="proj-nav-title">{prev.title}</div>
+                  <div className="pnav-header">
+                    <div className="pnav-dots">
+                      <span className="pnav-dot r" />
+                      <span className="pnav-dot y" />
+                      <span className="pnav-dot g" />
+                    </div>
+                    <span className="pnav-url">
+                      {projectDisplayUrl(prev.slug, prev.demo, prev.github)}
+                    </span>
+                  </div>
+                  <div className="pnav-body">
+                    <div className="proj-nav-dir">← Previous</div>
+                    <div className="proj-nav-title">{prev.title}</div>
+                  </div>
                 </Link>
               ) : (
                 <div />
@@ -184,12 +281,21 @@ export default async function ProjectPage({
             </div>
             <div>
               {next ? (
-                <Link
-                  href={`/projects/${next.slug}`}
-                  className="proj-nav-card next"
-                >
-                  <div className="proj-nav-dir">Next →</div>
-                  <div className="proj-nav-title">{next.title}</div>
+                <Link href={`/projects/${next.slug}`} className="proj-nav-card next">
+                  <div className="pnav-header">
+                    <div className="pnav-dots">
+                      <span className="pnav-dot r" />
+                      <span className="pnav-dot y" />
+                      <span className="pnav-dot g" />
+                    </div>
+                    <span className="pnav-url">
+                      {projectDisplayUrl(next.slug, next.demo, next.github)}
+                    </span>
+                  </div>
+                  <div className="pnav-body">
+                    <div className="proj-nav-dir">Next →</div>
+                    <div className="proj-nav-title">{next.title}</div>
+                  </div>
                 </Link>
               ) : (
                 <div />

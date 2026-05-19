@@ -114,6 +114,7 @@ export function useKineticAnimations() {
         ...document.querySelectorAll(".services-head h2"),
         ...document.querySelectorAll(".about-content h2"),
         ...document.querySelectorAll(".cta-section h2"),
+        ...document.querySelectorAll(".pj-headline .line"),
       ];
       headlines.forEach(wrapWords);
 
@@ -136,7 +137,7 @@ export function useKineticAnimations() {
     if (hasFineCursor) {
       const magnetEls = [
         ...document.querySelectorAll<HTMLElement>(
-          ".cta-section .email, .learn-more, .top-nav a.cta, .folder, .theme-toggle, .hero-tag, .scroll-cue"
+          ".cta-section .email, .learn-more, .top-nav a.cta, .folder, .theme-toggle, .hero-tag, .scroll-cue, .cta-strip-link, .proj-nav-card"
         ),
       ];
       magnetEls.forEach((el) => el.classList.add("magnetic"));
@@ -348,6 +349,24 @@ export function useKineticAnimations() {
         window.removeEventListener("scroll", onScroll);
         cancelAnimationFrame(rafId);
       });
+    }
+
+    // ── 8. Project aside — terracotta border once hero scrolls away ──────
+    {
+      const heroSection = document.querySelector<HTMLElement>(".project-hero");
+      const asideEl = document.querySelector<HTMLElement>(".project-aside");
+      if (heroSection && asideEl) {
+        const asideIo = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              asideEl.classList.toggle("is-in-body", !e.isIntersecting);
+            });
+          },
+          { threshold: 0 }
+        );
+        asideIo.observe(heroSection);
+        cleanups.push(() => asideIo.disconnect());
+      }
     }
 
     // ── Reveal on scroll (non-kinetic, but global) ─────────────────────

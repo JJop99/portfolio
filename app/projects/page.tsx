@@ -20,15 +20,37 @@ function projectDisplayUrl(p: Project): string {
 
 const VARIANTS = ["terra", "default", "ink", "terra", "ink", "default", "terra"] as const;
 
+type MiniItem = { text: string; serif?: boolean; dot?: boolean };
+const miniItems: MiniItem[] = [
+  { text: "Internship" },
+  { text: "●", dot: true },
+  { text: "Thesis", serif: true },
+  { text: "●", dot: true },
+  { text: "Freelance" },
+  { text: "●", dot: true },
+  { text: "University", serif: true },
+  { text: "●", dot: true },
+  { text: "Personal" },
+  { text: "●", dot: true },
+];
+
 export default function ProjectsPage() {
   return (
     <main>
       {/* Hero */}
       <section className="projects-hero">
+        <span className="deco d-proj-1" data-speed="0.3" aria-hidden="true">№</span>
+        <span className="deco d-proj-2" data-speed="0.5" aria-hidden="true">№</span>
+        <span className="deco d-proj-3" data-speed="0.1" aria-hidden="true">Seven projects. 2018 → 2025.</span>
+
         <div className="container">
-          <div className="pj-eyebrow">№ 01 · Work</div>
+          <div className="pj-info-pill">
+            <span className="i-dot" />
+            № 01 · 7 projects — 2018 → 2025
+          </div>
           <h1 className="pj-headline">
-            Selected <em>work.</em>
+            <span className="line">Selected</span>
+            <span className="line"><em>work.</em></span>
           </h1>
           <p className="pj-lede">
             Seven projects from six years of building things — a thesis, a freelance
@@ -36,6 +58,19 @@ export default function ProjectsPage() {
           </p>
         </div>
       </section>
+
+      {/* Mini marquee */}
+      <div className="marquee marquee--small" aria-hidden="true">
+        <div className="marquee-track">
+          {[...miniItems, ...miniItems].map((item, i) =>
+            item.dot ? (
+              <span key={i} className="marquee-dot">{item.text}</span>
+            ) : (
+              <span key={i} className={`marquee-item${item.serif ? " serif" : ""}`}>{item.text}</span>
+            )
+          )}
+        </div>
+      </div>
 
       {/* Project grid */}
       <section className="pj-section">
@@ -52,6 +87,7 @@ export default function ProjectsPage() {
                     <span className="pj-dot r" />
                     <span className="pj-dot y" />
                     <span className="pj-dot g" />
+                    <span className="pj-num">№ {String(i + 1).padStart(2, "0")}</span>
                     {project.label && (
                       <span className="pj-badge">{project.label}</span>
                     )}
