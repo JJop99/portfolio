@@ -27,11 +27,11 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="kit-theme-toggle"
+      className="theme-toggle"
       onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
       aria-label="Toggle light/dark theme"
     >
-      <span aria-hidden="true">{theme === "dark" ? "○" : "●"}</span>
+      <span aria-hidden="true">{theme === "dark" ? "☀" : "☾"}</span>
       <span>{theme === "dark" ? "Light" : "Dark"}</span>
     </button>
   );
