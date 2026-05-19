@@ -321,7 +321,9 @@ export function useKineticAnimations() {
     }
 
     // ── 7. Hero parallax for floating decorations ───────────────────────
-    if (bigMotionOk) {
+    // Subtle ≤0.4× velocity shift qualifies as UI affordance, not autoplay
+    // animation — runs regardless of prefers-reduced-motion (same as cursor/magnetic).
+    {
       const decos = [...document.querySelectorAll<HTMLElement>(".deco[data-speed]")];
       decos.forEach((d) => {
         const cs = getComputedStyle(d).transform;
