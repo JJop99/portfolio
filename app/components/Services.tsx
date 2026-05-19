@@ -123,8 +123,9 @@ export default function Services() {
               &amp; applied LLMs.
             </h3>
             <p>
-              Wiring large language models into real interfaces — locally, privately,
-              with sensible defaults. Currently studying the stack.
+              Wiring large language models into real products — locally, privately,
+              with sensible defaults. Currently deep in the Master AI programme at{" "}
+              <em>Victoria University of Wellington</em>.
             </p>
             <span className="drag-cue">
               <span className="arr">→</span> Scroll

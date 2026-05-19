@@ -11,7 +11,7 @@ const items: MarqueeItem[] = [
   { text: "●", dot: true },
   { text: "Wellington, NZ", serif: true },
   { text: "●", dot: true },
-  { text: "Applied AI", serif: false },
+  { text: "Master AI · VUW", serif: false },
   { text: "●", dot: true },
   { text: "by hand", serif: true },
   { text: "●", dot: true },

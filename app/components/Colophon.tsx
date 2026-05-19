@@ -49,9 +49,9 @@ export default function Colophon() {
               </li>
               <li>
                 <a
-                  href="#"
-                  aria-label="Coming soon"
-                  style={{ pointerEvents: "none", opacity: 0.5 }}
+                  href="https://linkedin.com/in/jacopo-jop"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   LinkedIn
                 </a>

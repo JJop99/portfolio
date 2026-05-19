@@ -10,8 +10,8 @@ export default function CTASection() {
           something <em>people remember.</em>
         </h2>
         <p className="sub reveal">
-          From global tech companies to growing startups —<br />
-          <em>and small teams in between.</em>
+          Computer engineer in <em>Wellington, NZ</em>.<br />
+          Freelance builds and full-time roles — remote or on-site.
         </p>
         <a href="mailto:jacopo.jop@gmail.com" className="email reveal">
           jacopo.jop@gmail.com <span className="arr">→</span>

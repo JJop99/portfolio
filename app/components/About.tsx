@@ -22,10 +22,13 @@ export default function About() {
                 color: "var(--ink-2)",
               }}
             >
-              Born in <em>Italy</em>, trained at <em>Bologna</em>, currently at the
-              bottom of the world. Six years of Computer Engineering, two years of
-              professional work, and the unshakeable feeling that{" "}
-              <em>the best code is the one that still makes sense in five years</em>.
+              Born in <em>Italy</em>, Computer Engineer from <em>Bologna</em> — one
+              of the oldest engineering faculties in the world. Currently doing a
+              Master in Artificial Intelligence at{" "}
+              <em>Victoria University of Wellington</em>. Between degree and passport
+              stamp, I spent two years as an electrician and carpenter rebuilding a
+              family house from foundation to finishing. Best systems thinking I&apos;ve
+              done had nothing to do with computers.
             </p>
 
             <blockquote className="pullquote reveal">
@@ -39,36 +42,41 @@ export default function About() {
             <div className="reasons reveal">
               <div className="reason">
                 <h4>
-                  I bring <em>premium</em> visual direction
+                  I&apos;ve shipped <em>production</em> code —
                   <br />
-                  that makes your product feel <em>built</em>, not assembled.
+                  internship, freelance, thesis. Not just side projects.
                 </h4>
               </div>
               <div className="reason">
                 <h4>
-                  I care about the <em>craft</em>,
+                  I own the <em>full stack</em>: database schema
                   <br />
-                  from API contract to final pixel.
+                  to CSS animation. No handoffs, no translation loss.
                 </h4>
               </div>
               <div className="reason">
                 <h4>
-                  I define <em>scalable</em> design systems
+                  I&apos;m studying <em>applied AI</em> right now —
                   <br />
-                  and architectures that keep growing.
+                  the layer that makes the next wave of products.
                 </h4>
               </div>
               <div className="reason">
                 <h4>
-                  I align <em>your goals</em>
+                  I&apos;ve built with my hands, not just my laptop.
                   <br />
-                  with my experience to make the right calls.
+                  Same instinct for <em>getting it right</em>.
                 </h4>
               </div>
             </div>
 
-            <a className="learn-more" href="#">
-              Learn more about me <span className="arr">→</span>
+            <a
+              className="learn-more"
+              href="https://linkedin.com/in/jacopo-jop"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Find me on LinkedIn <span className="arr">→</span>
             </a>
           </div>
         </div>

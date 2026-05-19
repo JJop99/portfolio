@@ -56,7 +56,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Bachelor's thesis at Unibo comparing Next.js (SSR) and React.js (CSR) performance, SEO, and resource efficiency on a real web application.",
     fullDescription:
-      "Bachelor's thesis titled \"Analysis of Client/Server Rendering Technologies in Web Applications\", submitted to the Department of Computer Science and Engineering at the University of Bologna (A.A. 2023/2024), supervised by Prof. Paolo Bellavista. The study benchmarks Next.js and React.js on loading speed, SEO, and resource efficiency, demonstrating that Next.js offers faster load times and better search engine ranking, while React.js remains preferable for high-interactivity Single-Page Applications. The practical component — a real web application (luca_jop) — was built in Next.js to conduct the performance tests.",
+      "Bachelor's thesis titled \"Analysis of Client/Server Rendering Technologies in Web Applications\", submitted to the Department of Computer Science and Engineering at the University of Bologna (A.A. 2023/2024), supervised by Prof. Paolo Bellavista. The study benchmarks Next.js and React.js on loading speed, SEO, and resource efficiency, demonstrating that Next.js offers faster load times and better search engine ranking, while React.js remains preferable for high-interactivity Single-Page Applications. The practical component was a real website built for my father Luca Jop, an architect based in Bologna — built to be genuinely useful, then used as the benchmark subject for the thesis.",
     period: "2023 – 2024",
     context: "Bachelor's Thesis — University of Bologna",
     tags: ["Next.js", "React.js", "SSR", "CSR", "Performance", "SEO"],
