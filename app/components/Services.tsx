@@ -45,23 +45,69 @@ export default function Services() {
             <span className="n">02</span> · Practice
           </div>
           <h2>
-            I help teams ship
+            Things I&apos;ve
             <br />
-            projects <em>like:</em>
+            actually <em>built:</em>
           </h2>
         </div>
 
-        {/* Row 01: Full-stack web applications */}
+        {/* Row 01: Internship — Mumble S.r.l. */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
-              <em>01.</em> Full-stack
+              <em>01.</em> Internship
               <br />
-              web applications.
+              Mumble S.r.l.
             </h3>
             <p>
-              End-to-end product builds — clean UIs, well-shaped APIs, the deploy
-              pipeline included. Built to perform and convert.
+              Three months building a full-stack React app in a professional
+              team — my first production deployment. Earned a written
+              recommendation from the CEO.
+            </p>
+            <span className="drag-cue">
+              <span className="arr">→</span> Scroll
+            </span>
+          </div>
+          <div className="right">
+            <ProjectCard slug="pagespeed-dashboard" variant="terra" style={{ flex: "0 0 480px" }} />
+          </div>
+        </div>
+
+        {/* Row 02: Bachelor's Thesis */}
+        <div className="service-row reveal">
+          <div className="left">
+            <h3>
+              <em>02.</em> Bachelor&apos;s
+              <br />
+              thesis — Unibo.
+            </h3>
+            <p>
+              Built the same website twice — once in Next.js (SSR), once in
+              React (CSR) — then benchmarked them head-to-head on Core Web
+              Vitals, SEO, and load performance.
+            </p>
+            <span className="drag-cue">
+              <span className="arr">→</span> Scroll
+            </span>
+          </div>
+          <div className="right">
+            <ProjectCard slug="luca-jop" variant="ink" />
+            <ProjectCard slug="lucajop-react" />
+          </div>
+        </div>
+
+        {/* Row 03: Freelance */}
+        <div className="service-row reveal">
+          <div className="left">
+            <h3>
+              <em>03.</em> Freelance
+              <br />
+              client work.
+            </h3>
+            <p>
+              Production websites for real clients — CMS-driven, tested, and
+              maintained. From a 2018 app landing page to a 2025 headless
+              corporate site with Playwright E2E tests.
             </p>
             <span className="drag-cue">
               <span className="arr">→</span> Scroll
@@ -69,103 +115,22 @@ export default function Services() {
           </div>
           <div className="right">
             <ProjectCard slug="atena-srl-website" variant="terra" />
-            <ProjectCard slug="apartment-expenses" />
-            <ProjectCard slug="pagespeed-dashboard" variant="ink" />
+            <ProjectCard slug="when-landing" variant="ink" />
           </div>
         </div>
 
-        {/* Row 02: Performance & observability */}
+        {/* Row 04: University, Personal & Craft */}
         <div className="service-row reveal">
           <div className="left">
             <h3>
-              <em>02.</em> Performance
+              <em>04.</em> University,
               <br />
-              &amp; observability.
+              personal &amp; hands-on.
             </h3>
             <p>
-              Faster pages, deeper Web-Vitals analysis, and lasting performance
-              budgets. Six years of academic study went into this.
-            </p>
-            <span className="drag-cue">
-              <span className="arr">→</span> Scroll
-            </span>
-          </div>
-          <div className="right">
-            {/* Hand-authored code demo — not a real project card */}
-            <Winshot
-              variant="ink"
-              code
-              url="lighthouse.ts — 18 lines"
-              style={{ flex: "0 0 520px" }}
-            >
-              <pre>
-                <span className="com">// Lighthouse run — capture only the metrics that matter.</span>
-                {"\n"}
-                <span className="kw">const</span> result = <span className="kw">await</span>{" "}
-                lighthouse(url, {"{"}
-                {"\n  "}onlyCategories: [<span className="str">&apos;performance&apos;</span>],
-                {"\n  "}formFactor: <span className="str">&apos;mobile&apos;</span>,
-                {"}"});{"\n\n"}
-                <span className="kw">const</span> {"{ lcp, cls, tbt }"} = result.audits;{"\n"}
-                report({"{ lcp, cls, tbt }"});
-              </pre>
-            </Winshot>
-            <ProjectCard slug="luca-jop" variant="terra" />
-          </div>
-        </div>
-
-        {/* Row 03: AI integrations & applied LLMs */}
-        <div className="service-row reveal">
-          <div className="left">
-            <h3>
-              <em>03.</em> AI integrations
-              <br />
-              &amp; applied LLMs.
-            </h3>
-            <p>
-              Wiring large language models into real products — locally, privately,
-              with sensible defaults. Currently deep in the Master AI programme at{" "}
-              <em>Victoria University of Wellington</em>.
-            </p>
-            <span className="drag-cue">
-              <span className="arr">→</span> Scroll
-            </span>
-          </div>
-          <div className="right">
-            {/* Exploratory tile — no project page yet, links to GitHub */}
-            <a
-              href="https://github.com/JJop99"
-              target="_blank"
-              rel="noreferrer"
-              style={{ display: "contents" }}
-            >
-              <Winshot
-                url="llm-chat.local"
-                title={
-                  <>
-                    <span className="acc">llama</span> 3.2
-                    <br />
-                    local.
-                  </>
-                }
-                tags="anemll · M1 · 8B"
-              />
-            </a>
-            <ProjectCard slug="lucajop-react" variant="ink" />
-          </div>
-        </div>
-
-        {/* Row 04: Engineering practice */}
-        <div className="service-row reveal">
-          <div className="left">
-            <h3>
-              <em>04.</em> Engineering
-              <br />
-              practice.
-            </h3>
-            <p>
-              Tests, infrastructure, documentation — the unglamorous half that makes
-              the glamorous half last ten years.
+              A carpooling platform, a shared-expenses app, and two years
+              rebuilding a farmhouse from bare walls — electrician, carpenter,
+              mason, and Daikin heat-pump installer.
             </p>
             <span className="drag-cue">
               <span className="arr">→</span> Scroll
@@ -173,7 +138,8 @@ export default function Services() {
           </div>
           <div className="right">
             <ProjectCard slug="carphaul" />
-            <ProjectCard slug="when-landing" variant="terra" />
+            <ProjectCard slug="apartment-expenses" variant="terra" />
+            <ProjectCard slug="ca-lisa" variant="ink" />
           </div>
         </div>
       </div>

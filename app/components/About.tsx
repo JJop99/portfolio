@@ -70,6 +70,16 @@ export default function About() {
               </div>
             </div>
 
+            <div className="hobbies reveal">
+              <span className="hobbies-label">Outside the keyboard —</span>
+              <ul className="hobbies-list">
+                <li><em>Apiculture</em> — managing beehives since 2015</li>
+                <li><em>Ultimate Frisbee</em> — ex-captain, Italian Serie B</li>
+                <li><em>3D printing</em> — prototyping since 2015</li>
+                <li><em>Renovation</em> — two years rebuilding <em>Ca&apos; Lisa</em> from foundation to finish</li>
+              </ul>
+            </div>
+
             <a
               className="learn-more"
               href="https://linkedin.com/in/jacopo-jop"

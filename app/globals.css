@@ -287,7 +287,13 @@ h1.massive .dot { color: var(--acc); }
 .reason::before { content: '✓'; position: absolute; left: 0; top: 4px; width: 24px; height: 24px; background: var(--acc); color: var(--paper); display: flex; align-items: center; justify-content: center; font: 700 14px/1 'Geist', sans-serif; border-radius: 50%; }
 .reason h4 { font: 500 19px/1.4 'Geist', sans-serif; letter-spacing: -0.01em; color: var(--ink-2); }
 .reason h4 em { color: var(--acc); font-size: 1.1em; }
-.learn-more { margin-top: 64px; display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px; background: var(--ink); color: var(--paper); font: 600 13px/1 'JetBrains Mono', monospace; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
+.hobbies { margin-top: 64px; padding: 24px 32px; border: 1px solid var(--rule); background: var(--surface); }
+.hobbies-label { display: block; font: 700 10px/1 'JetBrains Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+.hobbies-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 40px; }
+.hobbies-list li { font: 400 15px/1.5 'Geist', sans-serif; color: var(--ink-2); padding-left: 20px; position: relative; }
+.hobbies-list li::before { content: '—'; position: absolute; left: 0; color: var(--acc); }
+.hobbies-list li em { color: var(--ink-1); font-style: normal; font-weight: 600; }
+.learn-more { margin-top: 32px; display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px; background: var(--ink); color: var(--paper); font: 600 13px/1 'JetBrains Mono', monospace; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; transition: background .2s; }
 .learn-more:hover { background: var(--acc); }
 .learn-more .arr { font-size: 16px; }
 
@@ -418,8 +424,12 @@ h1.massive .dot { color: var(--acc); }
 .marquee--small { border-top: none; padding: 20px 0; }
 
 .pj-section { padding: 64px 0; }
+.pj-group { margin-bottom: 64px; }
+.pj-group-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+.pj-group-label { font: 700 11px/1 'JetBrains Mono', monospace; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-1); }
+.pj-group-desc { font: 400 11px/1 'JetBrains Mono', monospace; color: var(--ink-3); }
+.project-related-desc { font-size: 14px; color: var(--ink-2); margin: 8px 0 0; }
 .pj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.pj-card--featured { grid-column: span 2; }
 
 .pj-card {
   background: var(--paper-2); border: 1px solid var(--rule);

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PROJECTS, Project } from "@/lib/projects";
+import { PROJECTS, PROJECT_GROUPS, Project } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work — Jacopo Jop",
@@ -72,44 +72,57 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Project grid */}
+      {/* Project grid — grouped by context */}
       <section className="pj-section">
         <div className="container">
-          <div className="pj-grid">
-            {PROJECTS.map((project, i) => (
-              <Link
-                key={project.slug}
-                href={`/projects/${project.slug}`}
-                className={`pj-card pj-card--${VARIANTS[i % VARIANTS.length]}${i === 0 ? " pj-card--featured" : ""}`}
-              >
-                <div className="pj-card-top">
-                  <div className="pj-dots">
-                    <span className="pj-dot r" />
-                    <span className="pj-dot y" />
-                    <span className="pj-dot g" />
-                    <span className="pj-num">№ {String(i + 1).padStart(2, "0")}</span>
-                    {project.label && (
-                      <span className="pj-badge">{project.label}</span>
-                    )}
-                  </div>
-                  <span className="pj-period">{project.period}</span>
+          {PROJECT_GROUPS.map((group) => {
+            const groupProjects = PROJECTS.filter((p) => p.group === group.id);
+            if (groupProjects.length === 0) return null;
+            return (
+              <div key={group.id} className="pj-group">
+                <div className="pj-group-header">
+                  <span className="pj-group-label">{group.label}</span>
+                  <span className="pj-group-desc">{group.description}</span>
                 </div>
-                <div className="pj-card-body">
-                  <div className="pj-url">{projectDisplayUrl(project)}</div>
-                  <h2 className="pj-title">{project.title}</h2>
-                  <p className="pj-context">{project.context}</p>
-                  <div className="pj-tags">
-                    {project.tags.slice(0, 3).map((t) => (
-                      <span key={t} className="pj-tag">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="pj-arrow">→</span>
+                <div className="pj-grid">
+                  {groupProjects.map((project, i) => {
+                    const globalIndex = PROJECTS.findIndex((p) => p.slug === project.slug);
+                    return (
+                      <Link
+                        key={project.slug}
+                        href={`/projects/${project.slug}`}
+                        className={`pj-card pj-card--${VARIANTS[globalIndex % VARIANTS.length]}`}
+                      >
+                        <div className="pj-card-top">
+                          <div className="pj-dots">
+                            <span className="pj-dot r" />
+                            <span className="pj-dot y" />
+                            <span className="pj-dot g" />
+                            <span className="pj-num">№ {String(globalIndex + 1).padStart(2, "0")}</span>
+                            {project.label && (
+                              <span className="pj-badge">{project.label}</span>
+                            )}
+                          </div>
+                          <span className="pj-period">{project.period}</span>
+                        </div>
+                        <div className="pj-card-body">
+                          <div className="pj-url">{projectDisplayUrl(project)}</div>
+                          <h2 className="pj-title">{project.title}</h2>
+                          <p className="pj-context">{project.context}</p>
+                          <div className="pj-tags">
+                            {project.tags.slice(0, 3).map((t) => (
+                              <span key={t} className="pj-tag">{t}</span>
+                            ))}
+                          </div>
+                          <span className="pj-arrow">→</span>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </section>
 

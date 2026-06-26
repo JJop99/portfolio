@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "/Users/jacopo/.local/bin/npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/jacopo/portfolio",
+      "port": 3000
+    }
+  ]
+}

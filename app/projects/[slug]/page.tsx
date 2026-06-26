@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, getAllSlugs, PROJECTS } from "@/lib/projects";
+import { getProjectBySlug, getAllSlugs, PROJECTS, PROJECT_GROUPS } from "@/lib/projects";
 
 export function generateStaticParams() {
   return getAllSlugs().map((slug) => ({ slug }));
@@ -158,6 +158,34 @@ export default async function ProjectPage({
                   </div>
                 </section>
               )}
+
+              {/* Related project — thesis pair */}
+              {project.relatedSlug && (() => {
+                const related = getProjectBySlug(project.relatedSlug);
+                const groupMeta = PROJECT_GROUPS.find((g) => g.id === project.group);
+                if (!related) return null;
+                return (
+                  <section className="project-section project-related">
+                    <h2>Part of — {groupMeta?.label}</h2>
+                    <p className="project-related-desc">
+                      This project is one half of the thesis study. Both implementations cover the same site with different rendering strategies.
+                    </p>
+                    <Link href={`/projects/${related.slug}`} className="proj-nav-card" style={{ display: "block", marginTop: "12px" }}>
+                      <div className="pnav-header">
+                        <div className="pnav-dots">
+                          <span className="pnav-dot r" /><span className="pnav-dot y" /><span className="pnav-dot g" />
+                        </div>
+                        <span className="pnav-url">{related.demo ?? related.github?.replace("https://github.com/", "github/") ?? related.slug}</span>
+                      </div>
+                      <div className="pnav-body">
+                        <div className="proj-nav-dir">See also →</div>
+                        <div className="proj-nav-title">{related.title}</div>
+                        {related.label && <div className="proj-nav-dir" style={{ marginTop: "4px" }}>{related.label}</div>}
+                      </div>
+                    </Link>
+                  </section>
+                );
+              })()}
 
               {/* Key highlights */}
               <section className="project-section">

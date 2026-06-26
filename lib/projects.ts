@@ -1,3 +1,5 @@
+export type ProjectGroup = "internship" | "thesis" | "freelance" | "university" | "personal" | "craft";
+
 export interface Project {
   slug: string;
   title: string;
@@ -18,9 +20,21 @@ export interface Project {
   label?: string;
   imageUrl: string;
   highlights: string[];
+  group: ProjectGroup;
+  relatedSlug?: string;
 }
 
+export const PROJECT_GROUPS: { id: ProjectGroup; label: string; description: string }[] = [
+  { id: "internship", label: "Internship", description: "Mumble S.R.L. — 2022" },
+  { id: "thesis", label: "Bachelor's Thesis", description: "University of Bologna — 2023–2024" },
+  { id: "freelance", label: "Freelance", description: "Client work" },
+  { id: "university", label: "University project", description: "University of Bologna" },
+  { id: "personal", label: "Personal", description: "Side projects" },
+  { id: "craft", label: "Built with my hands", description: "Ca' Lisa renovation — 2022–2024" },
+];
+
 export const PROJECTS: Project[] = [
+  // ── Internship ──────────────────────────────────────────────────────────────
   {
     slug: "pagespeed-dashboard",
     title: "PageSpeed Dashboard",
@@ -49,7 +63,9 @@ export const PROJECTS: Project[] = [
       "Implemented performance history charts with Chart.js",
       "First real-world full-stack project in a professional environment",
     ],
+    group: "internship",
   },
+  // ── Bachelor's Thesis ────────────────────────────────────────────────────────
   {
     slug: "luca-jop",
     title: "Analysis of Client/Server Rendering in Web Apps",
@@ -70,7 +86,7 @@ export const PROJECTS: Project[] = [
     pdfUrl: "https://github.com/JJop99/JJop99/raw/main/Graduation_Thesis_Jop_Jacopo.pdf",
     pdfLabel: "Download Thesis PDF",
     featured: true,
-    label: "Bachelor's thesis",
+    label: "Bachelor's thesis — SSR",
     imageUrl: "https://opengraph.githubassets.com/1/JJop99/luca_jop",
     highlights: [
       "Compared CSR (React.js) and SSR (Next.js) on a real web application",
@@ -79,32 +95,8 @@ export const PROJECTS: Project[] = [
       "Supervised by Prof. Paolo Bellavista, University of Bologna",
       "95 commits of iterative research-driven development",
     ],
-  },
-  {
-    slug: "apartment-expenses",
-    title: "Apartment Expenses",
-    shortDescription:
-      "Full-stack TypeScript app for tracking and splitting shared apartment expenses.",
-    fullDescription:
-      "A personal project to solve a real problem: tracking and splitting shared expenses in a shared apartment. Built with Next.js and TypeScript, it allows multiple housemates to log expenses and see who owes what. The app is live on Vercel.",
-    period: "2024",
-    context: "Personal project",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    techStack: [
-      { category: "Framework", items: ["Next.js", "React"] },
-      { category: "Language", items: ["TypeScript"] },
-      { category: "Styling", items: ["Tailwind CSS"] },
-      { category: "Deployment", items: ["Vercel"] },
-    ],
-    github: "https://github.com/JJop99/apartment-expenses",
-    demo: "https://apartment-expenses-delta.vercel.app",
-    featured: false,
-    imageUrl: "https://opengraph.githubassets.com/1/JJop99/apartment-expenses",
-    highlights: [
-      "Built with TypeScript for full type safety",
-      "Solves a real day-to-day problem in shared living",
-      "Live demo deployed on Vercel",
-    ],
+    group: "thesis",
+    relatedSlug: "lucajop-react",
   },
   {
     slug: "lucajop-react",
@@ -123,7 +115,7 @@ export const PROJECTS: Project[] = [
     ],
     github: "https://github.com/JJop99/lucajop-react",
     featured: false,
-    label: "Bachelor's thesis",
+    label: "Bachelor's thesis — CSR",
     imageUrl: "https://opengraph.githubassets.com/1/JJop99/lucajop-react",
     highlights: [
       "CSR counterpart to the Next.js thesis implementation — same site, different rendering strategy",
@@ -131,36 +123,10 @@ export const PROJECTS: Project[] = [
       "Thesis concluded CSR remains preferable for high-interactivity Single-Page Applications",
       "Part of the practical component of the bachelor's thesis supervised by Prof. Paolo Bellavista",
     ],
+    group: "thesis",
+    relatedSlug: "luca-jop",
   },
-  {
-    slug: "carphaul",
-    title: "CarpHaul",
-    shortDescription:
-      "Web app for smart carpooling — automatically organises rides to shared events using route optimisation and Google Maps.",
-    fullDescription:
-      "CarpHaul is a web application designed to solve the logistics of group travel to shared events. An organiser creates an event and shares a unique invite code with participants. Each participant registers their travel preferences — whether they need a ride or have a car to offer, their pickup address, and available seats. The app then automatically groups passengers with the nearest drivers, calculates the optimal route via Google Maps, and provides each driver with a step-by-step itinerary and each passenger with an estimated pickup time. Built as a university group project (team of 3) with a full software engineering process: requirements analysis, use case modelling, risk analysis, UML architecture, E-R database design, and deployment planning.",
-    period: "2022 – 2023",
-    context: "University group project — University of Bologna",
-    tags: ["Web App", "Google Maps API", "REST API", "Database", "UML", "Software Engineering"],
-    techStack: [
-      { category: "Architecture", items: ["MVC", "REST API", "Distributed system"] },
-      { category: "External APIs", items: ["Google Maps (routing & geocoding)"] },
-      { category: "Database", items: ["Relational DB (E-R design)", "Persistent storage"] },
-      { category: "Engineering", items: ["UML diagrams", "Use case analysis", "Risk analysis", "Test plan"] },
-    ],
-    pdfUrl: "https://github.com/JJop99/JJop99/raw/main/CarpHaul_project.pdf",
-    pdfLabel: "Download Project Document",
-    featured: true,
-    label: "University project",
-    imageUrl: "https://opengraph.githubassets.com/1/JJop99/JJop99",
-    highlights: [
-      "Designed an algorithm to group passengers with the nearest available drivers",
-      "Integrated Google Maps API for route calculation and pickup time estimation",
-      "Full software engineering lifecycle: requirements, UML, risk analysis, test plan, deployment design",
-      "Team project (Giacomo Cerino, Jacopo Jop, Luca Levita) with 87-page project document",
-      "Addresses a real sustainability problem: reducing unnecessary car journeys to shared events",
-    ],
-  },
+  // ── Freelance ────────────────────────────────────────────────────────────────
   {
     slug: "atena-srl-website",
     title: "Atena S.r.l. — Corporate Website",
@@ -190,6 +156,7 @@ export const PROJECTS: Project[] = [
       "Automatic content revalidation via Sanity webhook — no redeploy needed on content changes",
       "JSON-LD LocalBusiness schema and dynamic sitemap for SEO",
     ],
+    group: "freelance",
   },
   {
     slug: "when-landing",
@@ -216,6 +183,94 @@ export const PROJECTS: Project[] = [
       "Full-screen video sections with autoplay on mobile via VisSense",
       "Download section with App Store and Google Play badges",
     ],
+    group: "freelance",
+  },
+  // ── University ───────────────────────────────────────────────────────────────
+  {
+    slug: "carphaul",
+    title: "CarpHaul",
+    shortDescription:
+      "Web app for smart carpooling — automatically organises rides to shared events using route optimisation and Google Maps.",
+    fullDescription:
+      "CarpHaul is a web application designed to solve the logistics of group travel to shared events. An organiser creates an event and shares a unique invite code with participants. Each participant registers their travel preferences — whether they need a ride or have a car to offer, their pickup address, and available seats. The app then automatically groups passengers with the nearest drivers, calculates the optimal route via Google Maps, and provides each driver with a step-by-step itinerary and each passenger with an estimated pickup time. Built as a university group project (team of 3) with a full software engineering process: requirements analysis, use case modelling, risk analysis, UML architecture, E-R database design, and deployment planning.",
+    period: "2022 – 2023",
+    context: "University group project — University of Bologna",
+    tags: ["Web App", "Google Maps API", "REST API", "Database", "UML", "Software Engineering"],
+    techStack: [
+      { category: "Architecture", items: ["MVC", "REST API", "Distributed system"] },
+      { category: "External APIs", items: ["Google Maps (routing & geocoding)"] },
+      { category: "Database", items: ["Relational DB (E-R design)", "Persistent storage"] },
+      { category: "Engineering", items: ["UML diagrams", "Use case analysis", "Risk analysis", "Test plan"] },
+    ],
+    pdfUrl: "https://github.com/JJop99/JJop99/raw/main/CarpHaul_project.pdf",
+    pdfLabel: "Download Project Document",
+    featured: true,
+    label: "University project",
+    imageUrl: "https://opengraph.githubassets.com/1/JJop99/JJop99",
+    highlights: [
+      "Designed an algorithm to group passengers with the nearest available drivers",
+      "Integrated Google Maps API for route calculation and pickup time estimation",
+      "Full software engineering lifecycle: requirements, UML, risk analysis, test plan, deployment design",
+      "Team project (Giacomo Cerino, Jacopo Jop, Luca Levita) with 87-page project document",
+      "Addresses a real sustainability problem: reducing unnecessary car journeys to shared events",
+    ],
+    group: "university",
+  },
+  // ── Craft ────────────────────────────────────────────────────────────────────
+  {
+    slug: "ca-lisa",
+    title: "Ca' Lisa — Full House Renovation",
+    shortDescription:
+      "Two years rebuilding a family farmhouse from bare walls to finished rooms: electrical systems, smart home, custom kitchen, stone cladding.",
+    fullDescription:
+      "Ca' Lisa is a rural farmhouse that required complete interior reconstruction. Between 2022 and 2024 I handled — as sole worker or lead — the full electrical rewire, photovoltaic integration, Daikin air-to-water heat pump installation (one of the first in the region; a Daikin team flew in from Japan to supervise), a bespoke kitchen designed and assembled using professional Blum hardware, and decorative stone and mosaic cladding throughout. Every phase had the same discipline I bring to software: understand the system, plan the work, iterate on problems.",
+    period: "2022 – 2024",
+    context: "Family house renovation — Ca' Lisa, Italy",
+    tags: ["Electrical", "Smart Home", "Carpentry", "Daikin", "Blum", "Photovoltaic"],
+    techStack: [
+      { category: "Electrical", items: ["Full rewire", "Photovoltaic system", "Smart home wiring"] },
+      { category: "HVAC", items: ["Daikin air-to-water heat pump", "Underfloor heating integration"] },
+      { category: "Carpentry", items: ["Custom kitchen — Blum professional hardware", "Bespoke furniture"] },
+      { category: "Masonry", items: ["Stone cladding", "Mosaic tiling", "Wall finishing"] },
+    ],
+    featured: false,
+    imageUrl: "https://opengraph.githubassets.com/1/JJop99/JJop99",
+    highlights: [
+      "Sole electrician for a full house rewire — planned load distribution, cable routing, and panel sizing from scratch",
+      "Installed one of the first Daikin air-to-water heat pump systems in the area; Daikin sent managers from Japan to follow the installation",
+      "Designed and assembled a bespoke kitchen using professional Blum MOVENTO and TIP-ON BLUMOTION hardware",
+      "Built decorative stone and mosaic cladding across multiple rooms",
+      "Two years of hands-on systems thinking with zero margin for rollback",
+    ],
+    group: "craft",
+  },
+  // ── Personal ─────────────────────────────────────────────────────────────────
+  {
+    slug: "apartment-expenses",
+    title: "Apartment Expenses",
+    shortDescription:
+      "Full-stack TypeScript app for tracking and splitting shared apartment expenses between housemates.",
+    fullDescription:
+      "A personal project to solve a real problem: tracking and splitting shared expenses in a shared apartment. Built with Next.js and TypeScript, it allows multiple housemates to log expenses and see who owes what. The app is live on Vercel.",
+    period: "2024",
+    context: "Personal project",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    techStack: [
+      { category: "Framework", items: ["Next.js", "React"] },
+      { category: "Language", items: ["TypeScript"] },
+      { category: "Styling", items: ["Tailwind CSS"] },
+      { category: "Deployment", items: ["Vercel"] },
+    ],
+    github: "https://github.com/JJop99/apartment-expenses",
+    demo: "https://apartment-expenses-delta.vercel.app",
+    featured: false,
+    imageUrl: "https://opengraph.githubassets.com/1/JJop99/apartment-expenses",
+    highlights: [
+      "Built with TypeScript for full type safety",
+      "Solves a real day-to-day problem in shared living",
+      "Live demo deployed on Vercel",
+    ],
+    group: "personal",
   },
 ];
 
